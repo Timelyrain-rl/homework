@@ -27,11 +27,15 @@ probabilities = TextGeneration_tools.calculate_last_word_probability(all_triples
 # 给定的开头
 starting_ngram = ("国务院","总理")
 
-# 生成文本
+# 生成文本，因为生成文本是按词数计算的，所以600词大概在1000字
 generated_text = TextGeneration_tools.generate_text_with_probability(starting_ngram, probabilities, 600)
 
 print(f"生成的文本字数为:{len(generated_text)}")
 print("\n")
 print(generated_text)
 
+# 划分文本
+segments = TextGeneration_tools.split_text(generated_text, 100)
 
+# 写入到txt文件中
+TextGeneration_tools.write_to_file(segments,'generated_report.txt')

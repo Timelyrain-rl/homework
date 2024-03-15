@@ -141,3 +141,28 @@ def generate_text_with_probability(starting_ngram, probabilities, num_words):
 
             text.append(next_word)
     return ''.join(text)
+
+
+def split_text(generated_text, n):
+    """
+    将生成的文本按字数 n 划分为段落
+    否则直接写入txt文件会是一长串，很难看
+
+    :param generated_text: 生成的文本
+    :param n: 指定一个段落的字数
+    :return: 分段后的段落列表
+    """
+    return [generated_text[i:i + n] for i in range(0, len(generated_text), n)]
+
+
+def write_to_file(segments, filename):
+    """
+    将划分后的段落写入文件
+
+    :param segments: 分段后的段落列表
+    :param filename: 要写入的文本文件名
+    :return: 无返回
+    """
+    with open(filename, 'w', encoding='utf-8') as file:
+        for segment in segments:
+            file.write(segment + '\n')
