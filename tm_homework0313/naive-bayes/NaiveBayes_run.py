@@ -28,4 +28,4 @@ print("验证集分类结果",predictions)
 print("验证集实际分类",Y_test)
 
 TP, FP, TN, FN = NaiveBayes_class.confusion_matrix(predictions, Y_test, positive='ham', negative='spam')
-print(f"True positive为:{TP}, \nFalse positive为:{FP}, \nTrue negative为:{TN}, \nFalse negative为:{FN}")
+print(f"\nTrue positive为:{TP}, \nFalse positive为:{FP}, \nTrue negative为:{TN}, \nFalse negative为:{FN}")
