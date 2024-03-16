@@ -1,3 +1,4 @@
+import math
 import os
 import re
 
@@ -81,7 +82,7 @@ class NaiveBayes:
             words = instance.split()
 
             # 验证集中文本是某类型的概率
-            else_prob = 0
+            else_prob = float('-inf')
             # 验证集中文本的类型
             text_class = None
 
@@ -95,7 +96,7 @@ class NaiveBayes:
                     word_freq = self.class_word_freq.get(label, {}).get(word, 0) + 1
                     word_prob = word_freq / (self.class_total_words.get(label, 0) + len(self.vocab))
                     # 将概率相加处理
-                    prob = prob + word_prob
+                    prob = prob + math.log(word_prob)
 
                 # 如果在某类型的概率大于在另外一个类型
                 # 那么就把文本归类到概率大的一方
