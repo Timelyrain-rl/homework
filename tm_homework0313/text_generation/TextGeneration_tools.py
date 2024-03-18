@@ -90,11 +90,10 @@ def calculate_last_word_probability(triplets_list):
         # 更新二元组的出现次数
         bigrams_count[bigram]["total_count"] += 1
         # 如果当前三元组的最后一个词在前两个词出现时，更新最后一个词的计数
-        if triplet[2] != "last_word_count":
-            if triplet[2] in bigrams_count[bigram]:
-                bigrams_count[bigram][triplet[2]] += 1
-            else:
-                bigrams_count[bigram][triplet[2]] = 1
+        if triplet[2] in bigrams_count[bigram]:
+            bigrams_count[bigram][triplet[2]] += 1
+        else:
+            bigrams_count[bigram][triplet[2]] = 1
 
     # 计算每个三元组中最后一个词在前两个词出现时的概率
     # 范围(0-1]
@@ -105,7 +104,7 @@ def calculate_last_word_probability(triplets_list):
             if last_word != "total_count":
                 probability = (count / total_count)
                 probabilities[(bigram[0], bigram[1], last_word)] = probability
-
+    print("概率计算完毕！")
     return probabilities
 
 
@@ -121,6 +120,7 @@ def generate_text_with_probability(starting_ngram, probabilities, num_words):
     :return:
     """
     text = list(starting_ngram)
+    print("\n打印文本生成过程的选择的词：")
     for _ in range(num_words - len(starting_ngram)):
         last_ngram = tuple(text[-len(starting_ngram):])
         next_word_probabilities = {ngram: prob for ngram, prob in probabilities.items() if ngram[:len(last_ngram)] == last_ngram}

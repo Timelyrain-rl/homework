@@ -21,7 +21,6 @@ documents = TextGeneration_tools.read_reports("reports")
 all_triples = TextGeneration_tools.extract_triples(documents)
 
 print(f"提取三元组的数量:{len(all_triples)}")
-print("\n")
 probabilities = TextGeneration_tools.calculate_last_word_probability(all_triples)
 
 # 给定的开头
